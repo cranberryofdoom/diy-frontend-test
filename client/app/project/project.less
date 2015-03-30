@@ -1,9 +1,120 @@
-.container {
-  margin-top: 120px;
+img,
+.comment {
+  border-radius: 4px;
 }
 
-img {
-  width: 100%;
-  display: block;
-  border-radius: 2px;
+img.icon {
+  opacity: 0.25;
+  width: 30px;
+}
+
+a {
+  color: @blue;
+  &:hover {
+    text-decoration: none;
+    color: @darkBlue;
+  }
+}
+
+.project {
+  margin-top: 90px;
+  margin-bottom: 40px;
+  h1 {
+    color: @black;
+  }
+  p {
+    color: @medGrey;
+  }
+  img.project-image {
+    width: 100%;
+    display: block;
+  }
+  a {
+    margin-left: 10px;
+  }
+}
+
+.feedback {
+  background-color: @lightGrey;
+  h3 {
+    color: @black;
+    margin-bottom: 20px;
+    img {
+      margin-right: 10;
+      vertical-align: top;
+    }
+  }
+  .comment-wrapper.maker-comment {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    .arrow-down {
+      border-top-color: @grey;
+    }
+    .comment {
+      background-color: @grey;
+      textarea {
+        width: 100%;
+        resize: none;
+        background-color: transparent;
+        border: none;
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+  }
+  .comment-wrapper {
+    margin-bottom: 10px;
+    position: relative;
+    span {
+      margin-left: 10px;
+      color: @medGrey;
+      font-weight: 900;
+      font-size: 11px;
+    }
+    img.avatar {
+      width: 60px;
+      float: left;
+    }
+    img.reply {
+      position: absolute;
+      bottom: 0;
+      right: 15px;
+    }
+    .comment {
+      border-top-left-radius: 0;
+      background-color: white;
+      padding: 10px 20px;
+      margin-left: 80px;
+      p {
+        margin-top: 10px;
+      }
+    }
+    .arrow-down {
+      position: absolute;
+      left: 70px;
+    }
+    .tag {
+      position: absolute;
+      top: 50px;
+      left: 10px;
+      background-color: @green;
+      color: white;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+  }
+}
+
+.favorite-wrapper {
+  img {
+    float: left;
+  }
+  a {
+    display: block;
+    margin-top: 4px;
+    margin-left: 40px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 }

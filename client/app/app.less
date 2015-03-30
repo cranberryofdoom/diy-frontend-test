@@ -2,6 +2,17 @@
 @import 'font-awesome/less/font-awesome.less';
 @icon-font-path: '/bower_components/bootstrap/fonts/';
 @fa-font-path: '/bower_components/font-awesome/fonts';
+@font-face {
+  font-family: Apex;
+  src: url('/assets/fonts/ApexRounded-Book.otf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Apex;
+  src: url('/assets/fonts/ApexRounded-Medium.otf');
+  font-weight: bold;
+}
 /**
  * App-wide Styles
  */
@@ -15,7 +26,8 @@
 
 // injector
 @import '_colors.less';
-@import 'main/main.less';
+@import '_global.less';
+@import '_helper.less';
+@import '_navbar.less';
 @import 'project/project.less';
-@import 'modal/modal.less';
 // endinjector

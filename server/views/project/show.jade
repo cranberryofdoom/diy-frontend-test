@@ -1,9 +1,47 @@
 link(rel="stylesheet" href="/app/app.css")
 nav.navbar.navbar-inverse.navbar-fixed-top
-.container
-	.row
-		.col-xs-8
-			img(src="#{details.clips[0].assets.web_960.url}")
-		.col-xs-4
-			h1 #{details.title}
-			p #{date}
+.project
+	.container
+		.row
+			.col-xs-8
+				img.project-image(src="#{details.clips[0].assets.web_960.url}")
+			.col-xs-4
+				h1 #{details.title}
+				p #{date}
+				.maker-info
+					img.maker-avatar(src="#{details.maker.avatar.icon.url}")
+					a(href="/#{details.maker.url}") #{details.maker.nickname}
+.feedback
+	.container
+		.row
+			.col-xs-7
+				h3 
+					img.icon(src="/assets/images/comment.svg")
+					| #{comments.length} Comments
+				for comment in comments
+					.comment-wrapper
+						img.avatar(src="" + comment.maker.avatar.small.url)
+						if comment.maker.type.moderator
+							span.tag Mod
+						.arrow-down
+						.comment
+							a(href="/"+comment.maker.url)= comment.maker.nickname 
+							span= comment.stamp
+							p= comment.html 	
+						img.icon.reply(src="/assets/images/reply.svg")
+				.comment-wrapper.maker-comment
+					img.avatar(src=""+currentMaker.avatar.small.url)
+					if currentMaker.type.moderator
+						span.tag Mod
+					.arrow-down
+					.comment
+						textarea(placeholder="Add a new comment")
+			.col-xs-3.col-xs-offset-1
+				h3
+					img.icon(src="/assets/images/favorite.svg")
+					| #{favorites.length} Favorites
+				.row
+					for favorite in favorites
+							.col-xs-12.col-sm-6.favorite-wrapper
+								img(src="" + favorite.avatar.icon.url)
+								a(href="/"+favorite.nickname)= favorite.nickname
