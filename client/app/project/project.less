@@ -8,6 +8,13 @@ img.icon {
   width: 30px;
 }
 
+span.tag {
+  background-color: @green;
+  color: white;
+  font-size: 11px;
+  position: absolute;
+}
+
 a {
   color: @blue;
   &:hover {
@@ -41,7 +48,6 @@ a {
     margin-bottom: 20px;
     img {
       margin-right: 10;
-      vertical-align: top;
     }
   }
   .comment-wrapper.maker-comment {
@@ -66,7 +72,7 @@ a {
   .comment-wrapper {
     margin-bottom: 10px;
     position: relative;
-    span {
+    span.date {
       margin-left: 10px;
       color: @medGrey;
       font-weight: 900;
@@ -94,14 +100,11 @@ a {
       position: absolute;
       left: 70px;
     }
-    .tag {
-      position: absolute;
+    span.tag {
       top: 50px;
-      left: 10px;
-      background-color: @green;
-      color: white;
-      padding: 1px 6px;
-      border-radius: 4px;
+      left: 13px;
+      padding: 1px 5px;
+      border-radius: 3px;
     }
   }
 }
@@ -116,5 +119,14 @@ a {
     margin-left: 40px;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+  span.tag {
+    bottom: -7px;
+    left: 31px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding-top: 3px;
   }
 }

@@ -18,17 +18,18 @@ nav.navbar.navbar-inverse.navbar-fixed-top
 				h3 
 					img.icon(src="/assets/images/comment.svg")
 					| #{comments.length} Comments
-				for comment in comments
-					.comment-wrapper
-						img.avatar(src="" + comment.maker.avatar.small.url)
-						if comment.maker.type.moderator
-							span.tag Mod
-						.arrow-down
-						.comment
-							a(href="/"+comment.maker.url)= comment.maker.nickname 
-							span= comment.stamp
-							p= comment.html 	
-						img.icon.reply(src="/assets/images/reply.svg")
+				.comments
+					for comment in comments
+						.comment-wrapper
+							img.avatar(src="" + comment.maker.avatar.small.url)
+							if comment.maker.type.moderator
+								span.tag Mod
+							.arrow-down
+							.comment
+								a(href="/"+comment.maker.url)= comment.maker.nickname 
+								span.date= comment.stamp
+								p= comment.html 	
+							img.icon.reply(src="/assets/images/reply.svg")
 				.comment-wrapper.maker-comment
 					img.avatar(src=""+currentMaker.avatar.small.url)
 					if currentMaker.type.moderator
@@ -44,4 +45,8 @@ nav.navbar.navbar-inverse.navbar-fixed-top
 					for favorite in favorites
 							.col-xs-12.col-sm-6.favorite-wrapper
 								img(src="" + favorite.avatar.icon.url)
+								if favorite.type.moderator
+									span.tag M
 								a(href="/"+favorite.nickname)= favorite.nickname
+script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+script(src="/app/project/project.js")

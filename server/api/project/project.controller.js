@@ -99,7 +99,9 @@ exports.show = function(req, res) {
   Q.all(requests).then(function(results) {
     var date = moment(new Date(results[0].stamp));
     for (var i = 0; i < results[1].length; i++) {
-      var dateDiff = shortEnglishHumanizer(new Date() - new Date(results[1][i].stamp));
+      var dateDiff = shortEnglishHumanizer((new Date() - new Date(results[1][i].stamp)), {
+        round: true
+      });
       requests[1][i].stamp = dateDiff.split(",")[0];
     }
     res.render("project/show", {
@@ -109,5 +111,7 @@ exports.show = function(req, res) {
       favorites: results[2],
       currentMaker: results[3]
     });
-  }, console.error);
+  }, function(errors) {
+    console.log(errors);
+  });
 };
