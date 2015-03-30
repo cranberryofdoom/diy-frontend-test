@@ -4,7 +4,7 @@ Code challenge!
 ## Getting Up & Running
 Running this on your own computer after cloning the repo is easy as 1, 2, 3. Open up your terminal and enter in the following commands:
 
-1. ```npm install``
+1. ```npm install```
 2. ```bower install```
 3. ```grunt server```
 
