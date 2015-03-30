@@ -3,9 +3,12 @@ img,
   border-radius: 4px;
 }
 
-img.icon {
+svg.icon {
   opacity: 0.25;
   width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
 }
 
 span.tag {
@@ -36,6 +39,16 @@ a {
     width: 100%;
     display: block;
   }
+  svg.project-favorite {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    path {
+      fill: @red;
+      stroke: white;
+      stroke-width: 4px;
+    }
+  }
   a {
     margin-left: 10px;
   }
@@ -44,10 +57,15 @@ a {
 .feedback {
   background-color: @lightGrey;
   h3 {
+    margin-top: 40px;
     color: @black;
     margin-bottom: 20px;
-    img {
-      margin-right: 10;
+    position: relative;
+    span {
+      margin-left: 40px;
+    }
+    svg {
+      margin-right: 10px;
     }
   }
   .comment-wrapper.maker-comment {
@@ -82,10 +100,16 @@ a {
       width: 60px;
       float: left;
     }
-    img.reply {
+    svg.reply {
       position: absolute;
       bottom: 0;
       right: 15px;
+      &:hover {
+        opacity: 1;
+        path {
+          fill: @blue;
+        }
+      }
     }
     .comment {
       border-top-left-radius: 0;
@@ -107,26 +131,26 @@ a {
       border-radius: 3px;
     }
   }
-}
-
-.favorite-wrapper {
-  img {
-    float: left;
-  }
-  a {
-    display: block;
-    margin-top: 4px;
-    margin-left: 40px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-  span.tag {
-    bottom: -7px;
-    left: 31px;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    padding-top: 3px;
+  .favorite-wrapper {
+    margin-bottom: 10px;
+    img {
+      float: left;
+    }
+    a {
+      display: block;
+      margin-top: 4px;
+      margin-left: 40px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    span.tag {
+      bottom: -7px;
+      left: 31px;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      padding-top: 3px;
+    }
   }
 }

@@ -1,52 +1,58 @@
-link(rel="stylesheet" href="/app/app.css")
-nav.navbar.navbar-inverse.navbar-fixed-top
-.project
-	.container
-		.row
-			.col-xs-8
-				img.project-image(src="#{details.clips[0].assets.web_960.url}")
-			.col-xs-4
-				h1 #{details.title}
-				p #{date}
-				.maker-info
-					img.maker-avatar(src="#{details.maker.avatar.icon.url}")
-					a(href="/#{details.maker.url}") #{details.maker.nickname}
-.feedback
-	.container
-		.row
-			.col-xs-7
-				h3 
-					img.icon(src="/assets/images/comment.svg")
-					| #{comments.length} Comments
-				.comments
-					for comment in comments
-						.comment-wrapper
-							img.avatar(src="" + comment.maker.avatar.small.url)
-							if comment.maker.type.moderator
-								span.tag Mod
-							.arrow-down
-							.comment
-								a(href="/"+comment.maker.url)= comment.maker.nickname 
-								span.date= comment.stamp
-								p= comment.html 	
-							img.icon.reply(src="/assets/images/reply.svg")
-				.comment-wrapper.maker-comment
-					img.avatar(src=""+currentMaker.avatar.small.url)
-					if currentMaker.type.moderator
-						span.tag Mod
-					.arrow-down
-					.comment
-						textarea(placeholder="Add a new comment")
-			.col-xs-3.col-xs-offset-1
-				h3
-					img.icon(src="/assets/images/favorite.svg")
-					| #{favorites.length} Favorites
-				.row
-					for favorite in favorites
-							.col-xs-12.col-sm-6.favorite-wrapper
-								img(src="" + favorite.avatar.icon.url)
-								if favorite.type.moderator
-									span.tag M
-								a(href="/"+favorite.nickname)= favorite.nickname
-script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
-script(src="/app/project/project.js")
+doctype html
+html(lang='en')
+  head
+    link(rel="stylesheet" href="/app/app.css")
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+    .project
+      .container
+        .row
+          .col-xs-12.col-sm-8
+            img.project-image(src="#{details.clips[0].assets.web_960.url}")
+            img.project-favorite(src="/assets/images/favorite.svg")
+          .col-xs-12.col-sm-4
+            h1 #{details.title}
+            p #{date}
+            .maker-info
+              img.maker-avatar(src="#{details.maker.avatar.icon.url}")
+              a(href="/#{details.maker.url}") #{details.maker.nickname}
+    .feedback
+      .container
+        .row
+          .col-xs-12.col-sm-7
+            h3 
+              img.icon(src="/assets/images/comment.svg")
+              span #{comments.length} Comments
+            .comments
+              for comment in comments
+                .comment-wrapper
+                  img.avatar(src="" + comment.maker.avatar.small.url)
+                  if comment.maker.type.moderator
+                    span.tag Mod
+                  .arrow-down
+                  .comment
+                    a(href="/"+comment.maker.url)= comment.maker.nickname 
+                    span.date= comment.stamp
+                    p= comment.html   
+                  img.svg.icon.reply(src="/assets/images/reply.svg")
+            .comment-wrapper.maker-comment
+              img.avatar(src=""+currentMaker.avatar.small.url)
+              if currentMaker.type.moderator
+                span.tag Mod
+              .arrow-down
+              .comment
+                textarea(placeholder="Add a new comment")
+          .col-xs-12.col-sm-4.col-sm-offset-1
+            h3
+              img.icon(src="/assets/images/favorite.svg")
+              span #{favorites.length} Favorites
+            .row
+              for favorite in favorites
+                  .col-xs-6.favorite-wrapper
+                    img(src="" + favorite.avatar.icon.url)
+                    if favorite.type.moderator
+                      span.tag M
+                    a(href="/"+favorite.nickname)= favorite.nickname
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+    script(src="/app/project/project.js")
+    script(src="/app/svg/svg.js")

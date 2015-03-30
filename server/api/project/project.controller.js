@@ -4,91 +4,45 @@ var _ = require('lodash');
 var request = require('request');
 var Q = require('q');
 var moment = require('moment');
-var humanizeDuration = require("humanize-duration");
-
-var shortEnglishHumanizer = humanizeDuration.humanizer({
-  language: "shortEn",
-  languages: {
-    shortEn: {
-      year: function() {
-        return "y";
-      },
-      month: function() {
-        return "mo";
-      },
-      week: function() {
-        return "w";
-      },
-      day: function() {
-        return "d";
-      },
-      hour: function() {
-        return "h";
-      },
-      minute: function() {
-        return "m";
-      },
-      second: function() {
-        return "s";
-      },
-      millisecond: function() {
-        return "ms";
-      },
-    }
-  }
-});
+var shortEnglishHumanizer = require('../humanizer/humanizer');
 
 exports.show = function(req, res) {
 
   var projectDetailURL = "http://api.diy.org/makers/" + req.params.maker + "/projects/" + req.params.projectId;
   var requests = [];
 
-  function getProjectDetails() {
-    var result = Q.defer();
-    requests.push(result.promise);
-    request(projectDetailURL, function(error, response, body) {
-      if (error) {
-        result.reject(new Error(error));
+  function makeRequestTo(url, result) {
+    request(url, function(error, response, body) {
+      if (response.statusCode == 404) {
+        result.reject(JSON.parse(body).response.error);
       } else if (response.statusCode == 200) {
         result.resolve(JSON.parse(body).response);
       }
     });
+  };
+
+  function getProjectDetails() {
+    var result = Q.defer();
+    requests.push(result.promise);
+    makeRequestTo(projectDetailURL, result);
   }
 
   function getProjectComments() {
     var result = Q.defer();
     requests.push(result.promise);
-    request(projectDetailURL + "/comments", function(error, response, body) {
-      if (error) {
-        result.reject(new Error(error));
-      } else if (response.statusCode == 200) {
-        result.resolve(JSON.parse(body).response);
-      }
-    });
+    makeRequestTo(projectDetailURL + "/comments", result);
   }
 
   function getProjectFavorites() {
     var result = Q.defer();
     requests.push(result.promise);
-    request(projectDetailURL + "/favorites", function(error, response, body) {
-      if (error) {
-        result.reject(new Error(error));
-      } else if (response.statusCode == 200) {
-        result.resolve(JSON.parse(body).response);
-      }
-    });
+    makeRequestTo(projectDetailURL + "/favorites", result);
   }
 
   function getCurrentMakerDetails() {
     var result = Q.defer();
     requests.push(result.promise);
-    request("http://api.diy.org/makers/hackkitty", function(error, response, body) {
-      if (error) {
-        result.reject(new Error(error));
-      } else if (response.statusCode == 200) {
-        result.resolve(JSON.parse(body).response);
-      }
-    });
+    makeRequestTo("http://api.diy.org/makers/hackkitty", result);
   }
 
   getProjectDetails();
@@ -112,6 +66,6 @@ exports.show = function(req, res) {
       currentMaker: results[3]
     });
   }, function(errors) {
-    console.log(errors);
+    res.render("404");
   });
 };
